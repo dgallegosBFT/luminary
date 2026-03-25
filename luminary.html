@@ -3,734 +3,619 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Luminary – Build beautiful products, faster than ever before.</title>
+  <title>Luminary Robotics — The Operating System for Your Factory Floor</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
-    /* ── Reset & Base ───────────────────────────────────────────── */
+    /* ── Reset ──────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Inter', sans-serif;
-      color: #0F1728;
-      background: #fff;
-      min-width: 320px;
-    }
+    body { font-family: 'Inter', sans-serif; background: #1A1A1A; color: #fff; min-width: 320px; }
     a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
 
-    /* ── Tokens ─────────────────────────────────────────────────── */
+    /* ── Tokens ─────────────────────────────────────────────── */
     :root {
-      --accent:       #4F46E5;
-      --accent-dark:  #3730A3;
-      --accent-light: #EEF2FF;
-      --dark:         #0F1728;
-      --gray-500:     #64748B;
-      --gray-200:     #E2E8F0;
-      --gray-100:     #F1F5F9;
-      --gray-50:      #F8FAFC;
-      --white:        #ffffff;
+      --grey-900: #1A1A1A;
+      --grey-800: #252525;
+      --grey-700: #333333;
+      --grey-600: #555555;
+      --grey-500: #808080;
+      --grey-400: #AAAAAA;
+      --grey-300: #CCCCCC;
+      --grey-200: #E5E5E5;
+      --grey-100: #F2F1ED;
+      --white:    #FFFFFF;
+      --teal:     #2DC4B2;
     }
 
-    /* ── Layout Helpers ─────────────────────────────────────────── */
-    .container {
-      max-width: 1440px;
-      margin: 0 auto;
-      padding: 0 80px;
-    }
+    /* ── Layout ─────────────────────────────────────────────── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
 
-    /* ════════════════════════════════════════════════════════════
+    /* ── Buttons ─────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.85; }
+    .btn-primary   { background: var(--grey-900); color: var(--white); }
+    .btn-teal      { background: var(--teal);     color: var(--grey-900); }
+    .btn-outline   { background: transparent; color: var(--white); border: 1.5px solid var(--grey-500); }
+    .btn-outline-white { background: transparent; color: var(--white); border: 1.5px solid var(--white); padding: 8px 16px; font-size: 11px; }
+    .btn-text      { background: transparent; color: var(--white); padding: 14px 0; border: none; }
+
+    /* ════════════════════════════════════════════════════════
        NAVBAR
-    ════════════════════════════════════════════════════════════ */
+    ════════════════════════════════════════════════════════ */
     .navbar {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: var(--white);
-      border-bottom: 1px solid var(--gray-200);
-      height: 72px;
+      background: var(--grey-900);
+      height: 64px;
+      display: flex;
+      align-items: center;
     }
     .navbar .container {
-      height: 100%;
       display: flex;
       align-items: center;
       gap: 0;
+      width: 100%;
+      max-width: 100%;
+      padding: 0 80px;
     }
     .navbar-logo {
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--accent);
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--white);
       flex-shrink: 0;
     }
     .navbar-spacer { flex: 1; }
     .navbar-links {
       display: flex;
       align-items: center;
-      gap: 0;
+      list-style: none;
     }
-    .navbar-links a {
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--gray-500);
+    .navbar-links li a {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--grey-400);
       padding: 0 16px;
       transition: color 0.2s;
     }
-    .navbar-links a:hover { color: var(--dark); }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Inter', sans-serif;
-      font-weight: 600;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: opacity 0.2s, transform 0.15s;
-      border: none;
-    }
-    .btn:hover { opacity: 0.88; transform: translateY(-1px); }
-    .btn-primary {
-      background: var(--accent);
-      color: var(--white);
-      font-size: 14px;
-      padding: 10px 20px;
-    }
-    .btn-primary-lg {
-      background: var(--accent);
-      color: var(--white);
-      font-size: 16px;
-      padding: 16px 28px;
-    }
-    .btn-secondary-lg {
-      background: var(--white);
-      color: var(--dark);
-      font-size: 16px;
-      padding: 15px 28px;
-      border: 1.5px solid var(--gray-200);
-    }
-    .btn-white {
-      background: var(--white);
-      color: var(--accent);
-      font-size: 16px;
-      padding: 16px 32px;
-    }
-    .btn-outline-white {
-      background: transparent;
-      color: var(--white);
-      font-size: 16px;
-      padding: 15px 32px;
-      border: 1.5px solid #A5B4FC;
-    }
+    .navbar-links li a:hover { color: var(--white); }
 
-    /* ════════════════════════════════════════════════════════════
+    /* ════════════════════════════════════════════════════════
        HERO
-    ════════════════════════════════════════════════════════════ */
+    ════════════════════════════════════════════════════════ */
     .hero {
-      background: var(--white);
-      padding: 80px 0;
+      background: var(--grey-800);
+      padding: 100px 0 88px;
+      min-height: 560px;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      text-align: center;
+      position: relative;
+      overflow: hidden;
     }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--accent-light);
-      color: var(--accent);
-      font-size: 13px;
-      font-weight: 500;
-      padding: 6px 14px;
-      border-radius: 100px;
+    /* Crosshatch texture */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(255,255,255,0.03) 60px, rgba(255,255,255,0.03) 61px),
+        repeating-linear-gradient(-45deg, transparent, transparent 60px, rgba(255,255,255,0.03) 60px, rgba(255,255,255,0.03) 61px);
     }
-    .badge-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      flex-shrink: 0;
+    .hero .container { position: relative; z-index: 1; max-width: 1200px; }
+    .hero-eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--grey-400);
+      margin-bottom: 16px;
     }
     .hero-headline {
-      margin-top: 24px;
-      font-size: 64px;
-      font-weight: 700;
-      line-height: 76px;
-      color: var(--dark);
-      max-width: 800px;
+      font-size: 80px;
+      font-weight: 900;
+      line-height: 0.95;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      color: var(--white);
+      max-width: 900px;
+      margin-bottom: 28px;
     }
-    .hero-sub {
-      margin-top: 20px;
-      font-size: 20px;
-      line-height: 32px;
-      color: var(--gray-500);
-      max-width: 620px;
+    .hero-body {
+      font-size: 18px;
+      line-height: 1.65;
+      color: var(--grey-300);
+      max-width: 640px;
+      margin-bottom: 36px;
     }
-    .hero-buttons {
-      margin-top: 36px;
-      display: flex;
-      gap: 16px;
-      align-items: center;
+    .hero-buttons { display: flex; align-items: center; gap: 24px; }
+
+    /* ════════════════════════════════════════════════════════
+       STATS
+    ════════════════════════════════════════════════════════ */
+    .stats { background: var(--white); padding: 0; }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
     }
-    /* ── App Mockup ─────────────────────────────────────────────── */
-    .mockup-wrap {
-      margin-top: 60px;
-      width: 960px;
-      max-width: calc(100% - 80px);
-      border-radius: 16px;
-      border: 1px solid var(--gray-200);
-      overflow: hidden;
-      box-shadow: 0 24px 60px rgba(15,23,42,0.10);
-    }
-    .browser-bar {
-      background: var(--white);
-      border-bottom: 1px solid var(--gray-200);
-      height: 44px;
-      display: flex;
-      align-items: center;
-      padding: 0 16px;
-      gap: 8px;
-    }
-    .traffic-dot {
-      width: 12px; height: 12px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .browser-spacer { flex: 1; }
-    .url-bar {
-      background: var(--gray-100);
-      border-radius: 6px;
-      padding: 6px 12px;
-      font-size: 12px;
-      color: var(--gray-500);
-      width: 280px;
+    .stat-item {
       text-align: center;
+      padding: 48px 24px;
+      border-right: 1px solid var(--grey-200);
     }
-    .mockup-content {
+    .stat-item:last-child { border-right: none; }
+    .stat-number {
+      font-size: 64px;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--grey-900);
+      margin-bottom: 10px;
+    }
+    .stat-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--grey-600);
+      line-height: 1.4;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       SOLUTIONS
+    ════════════════════════════════════════════════════════ */
+    .solutions { background: var(--grey-100); padding: 80px 0; }
+    .section-heading {
+      font-size: 40px;
+      font-weight: 900;
+      line-height: 1.1;
+      color: var(--grey-900);
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--grey-600);
+      max-width: 560px;
+      margin-bottom: 48px;
+    }
+    .section-heading.light { color: var(--white); }
+    .section-sub.light    { color: var(--grey-400); }
+
+    .cards-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .sol-card { background: var(--white); overflow: hidden; }
+    .sol-card-image {
+      height: 220px;
+      background: var(--grey-700);
+      position: relative;
       display: flex;
-      background: linear-gradient(to bottom right, var(--accent-light), #E0E7FF);
-      height: 476px;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
     }
-    .mock-sidebar {
-      width: 200px;
-      flex-shrink: 0;
-      background: var(--white);
-      border-right: 1px solid var(--gray-200);
-      padding: 24px 16px;
+    /* Crosshatch for image placeholders */
+    .sol-card-image::before,
+    .sol-card-image::after {
+      content: '';
+      position: absolute;
+      background: var(--grey-600);
+      height: 1px;
+      width: 141%;
+      left: -20%;
+    }
+    .sol-card-image::before { transform: rotate(30deg); }
+    .sol-card-image::after  { transform: rotate(-30deg); }
+    .sol-card-body { padding: 20px; display: flex; flex-direction: column; gap: 20px; }
+    .sol-card-title { font-size: 18px; font-weight: 700; color: var(--grey-900); }
+    .card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--grey-900);
+      padding: 10px 16px;
+      width: fit-content;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       INDUSTRIES
+    ════════════════════════════════════════════════════════ */
+    .industries { background: var(--white); padding: 80px 0; }
+    .section-header-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 48px;
+    }
+    .section-header-row .section-sub { margin-bottom: 0; }
+
+    /* ════════════════════════════════════════════════════════
+       PLATFORM
+    ════════════════════════════════════════════════════════ */
+    .platform { background: var(--grey-900); padding: 80px 0; }
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 16px;
+    }
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-top: 48px;
+    }
+    .platform-layer {
+      background: var(--grey-800);
+      padding: 28px 24px;
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
-    .mock-sidebar-item {
-      height: 36px;
-      border-radius: 6px;
-      padding: 0 12px;
-      display: flex;
-      align-items: center;
-    }
-    .mock-sidebar-item.active { background: var(--accent-light); }
-    .mock-sidebar-bar {
-      height: 12px;
-      border-radius: 4px;
-    }
-    .mock-main {
-      flex: 1;
-      background: var(--gray-50);
-      padding: 20px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(2, 1fr);
-      gap: 20px;
-    }
-    .mock-card {
-      background: var(--white);
-      border: 1px solid var(--gray-200);
-      border-radius: 10px;
-      padding: 20px 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .mock-card-title { height: 10px; border-radius: 4px; background: var(--gray-200); width: 120px; }
-    .mock-card-value { height: 22px; border-radius: 4px; background: var(--accent); width: 80px; }
-    .mock-card-bar  { height: 8px;  border-radius: 4px; background: var(--gray-100); }
-
-    /* ════════════════════════════════════════════════════════════
-       SOCIAL PROOF STRIP
-    ════════════════════════════════════════════════════════════ */
-    .social-proof {
-      background: var(--gray-100);
-      height: 120px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-    }
-    .social-proof-label {
-      font-size: 14px;
-      color: var(--gray-500);
-    }
-    .logo-row {
-      display: flex;
-      align-items: center;
-      gap: 56px;
-    }
-    .logo-row span {
-      font-size: 18px;
+    .layer-num {
+      font-size: 10px;
       font-weight: 700;
-      color: #94A3B8;
-    }
-
-    /* ════════════════════════════════════════════════════════════
-       FEATURES SECTION
-    ════════════════════════════════════════════════════════════ */
-    .features {
-      background: var(--white);
-      padding: 80px 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .section-eyebrow {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--accent);
-      letter-spacing: 2px;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
+      color: var(--grey-500);
     }
-    .section-title {
-      margin-top: 16px;
-      font-size: 40px;
-      font-weight: 700;
-      color: var(--dark);
-      text-align: center;
-    }
-    .section-sub {
-      margin-top: 16px;
-      font-size: 18px;
-      line-height: 28px;
-      color: var(--gray-500);
-      text-align: center;
-      max-width: 560px;
-    }
-    .feature-cards {
-      margin-top: 56px;
-      display: flex;
-      gap: 24px;
-      width: 100%;
-      max-width: 1248px;
-      padding: 0 80px;
-    }
-    .feature-card {
-      flex: 1;
-      background: var(--gray-100);
-      border-radius: 16px;
-      padding: 32px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .icon-box {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      flex-shrink: 0;
-    }
-    .feature-card-title {
-      font-size: 20px;
-      font-weight: 600;
-      color: var(--dark);
-    }
-    .feature-card-desc {
-      font-size: 15px;
-      line-height: 24px;
-      color: var(--gray-500);
-    }
-
-    /* ════════════════════════════════════════════════════════════
-       TESTIMONIALS
-    ════════════════════════════════════════════════════════════ */
-    .testimonials {
-      background: var(--gray-50);
-      padding: 64px 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 48px;
-    }
-    .testimonial-image-wrap {
-      width: 824px;
-      max-width: calc(100% - 80px);
-      height: 526px;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 16px 48px rgba(15,23,42,0.14);
-    }
-    .testimonial-image-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .testimonial-cards {
-      display: flex;
-      gap: 24px;
-      max-width: 1248px;
-      width: 100%;
-      padding: 0 80px;
-    }
-    .testimonial-card {
-      flex: 1;
-      background: var(--white);
-      border: 1px solid var(--gray-200);
-      border-radius: 14px;
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    .testimonial-quote {
-      font-size: 15px;
-      line-height: 24px;
-      color: var(--dark);
-    }
-    .testimonial-author-name {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--dark);
-    }
-    .testimonial-author-role {
-      font-size: 13px;
-      color: var(--gray-500);
-      margin-top: 2px;
-    }
-
-    /* ════════════════════════════════════════════════════════════
-       CTA SECTION
-    ════════════════════════════════════════════════════════════ */
-    .cta-section {
-      background: linear-gradient(to right, var(--accent), var(--accent-dark));
-      padding: 64px 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 24px;
-      text-align: center;
-    }
-    .cta-title {
-      font-size: 44px;
-      font-weight: 700;
+    .layer-title {
+      font-size: 16px;
+      font-weight: 800;
       color: var(--white);
+      line-height: 1.3;
     }
-    .cta-sub {
-      font-size: 18px;
-      line-height: 28px;
-      color: #C7D2FE;
-    }
-    .cta-buttons {
-      display: flex;
-      gap: 16px;
-      align-items: center;
+    .layer-desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--grey-400);
     }
 
-    /* ════════════════════════════════════════════════════════════
-       FOOTER
-    ════════════════════════════════════════════════════════════ */
-    .footer {
-      background: #0F1728;
-      height: 200px;
-      display: flex;
-      align-items: center;
+    /* ════════════════════════════════════════════════════════
+       CTA BANNER
+    ════════════════════════════════════════════════════════ */
+    .cta-banner {
+      background: var(--grey-900);
+      border-top: 4px solid var(--teal);
+      padding: 100px 0;
     }
-    .footer .container {
+    .cta-banner-headline {
+      font-size: 44px;
+      font-weight: 900;
+      line-height: 1.1;
+      color: var(--white);
+      max-width: 760px;
+      margin-bottom: 16px;
+    }
+    .cta-banner-sub {
+      font-size: 16px;
+      color: var(--grey-400);
+      max-width: 520px;
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+    .cta-buttons { display: flex; align-items: center; gap: 16px; }
+
+    /* ════════════════════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════════════════════ */
+    .footer {
+      background: var(--grey-700);
+      padding: 0 80px;
+      height: 120px;
       display: flex;
       align-items: center;
     }
     .footer-logo {
-      font-size: 20px;
-      font-weight: 700;
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
       color: var(--white);
-    }
-    .footer-copy {
-      font-size: 13px;
-      color: var(--gray-500);
-      margin-top: 8px;
     }
     .footer-spacer { flex: 1; }
     .footer-links {
       display: flex;
       gap: 32px;
+      list-style: none;
+      margin-right: 48px;
     }
     .footer-links a {
-      font-size: 14px;
-      color: var(--gray-500);
+      font-size: 13px;
+      color: var(--grey-400);
       transition: color 0.2s;
     }
     .footer-links a:hover { color: var(--white); }
+    .footer-copy { font-size: 12px; color: var(--grey-500); white-space: nowrap; }
 
-    /* ════════════════════════════════════════════════════════════
+    /* ════════════════════════════════════════════════════════
        RESPONSIVE
-    ════════════════════════════════════════════════════════════ */
+    ════════════════════════════════════════════════════════ */
     @media (max-width: 1100px) {
-      .container { padding: 0 40px; }
-      .feature-cards, .testimonial-cards { padding: 0 40px; }
-      .hero-headline { font-size: 48px; line-height: 60px; }
-      .mockup-wrap { width: 100%; }
+      .hero-headline { font-size: 60px; }
+      .stats-grid { grid-template-columns: repeat(3, 1fr); }
+      .cards-grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .platform-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
-      .container { padding: 0 24px; }
       .navbar-links { display: none; }
-      .hero-headline { font-size: 36px; line-height: 48px; }
-      .hero-sub { font-size: 17px; }
-      .hero-buttons { flex-direction: column; }
-      .feature-cards, .testimonial-cards {
-        flex-direction: column;
-        padding: 0 24px;
-      }
-      .logo-row { gap: 24px; flex-wrap: wrap; justify-content: center; }
-      .cta-title { font-size: 32px; }
-      .cta-buttons { flex-direction: column; }
-      .footer { height: auto; padding: 40px 0; }
-      .footer .container { flex-direction: column; gap: 24px; text-align: center; }
+      .hero-headline { font-size: 40px; }
+      .hero-body { font-size: 16px; }
+      .hero-buttons { flex-direction: column; align-items: flex-start; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--grey-200); }
+      .cards-grid-4 { grid-template-columns: 1fr; }
+      .platform-grid { grid-template-columns: 1fr; }
+      .section-header-row { flex-direction: column; gap: 16px; }
+      .cta-banner-headline { font-size: 32px; }
+      .cta-buttons { flex-direction: column; align-items: flex-start; }
+      .footer { flex-wrap: wrap; height: auto; padding: 32px 40px; gap: 16px; }
       .footer-spacer { display: none; }
+      .footer-links { flex-wrap: wrap; margin-right: 0; }
+    }
+
+    /* Fade-in animation */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
 <body>
 
-  <!-- ══ NAVBAR ══════════════════════════════════════════════════ -->
+  <!-- ══ NAVBAR ══════════════════════════════════════════════ -->
   <nav class="navbar">
     <div class="container">
-      <span class="navbar-logo">Luminary</span>
+      <span class="navbar-logo">Luminary Robotics</span>
       <div class="navbar-spacer"></div>
-      <div class="navbar-links">
-        <a href="#features">Features</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#about">About</a>
-        <a href="#blog">Blog</a>
-      </div>
-      <button class="btn btn-primary" style="margin-left: 16px;">Get Started</button>
+      <ul class="navbar-links">
+        <li><a href="#solutions">Solutions <span style="font-size:9px;opacity:.6">▾</span></a></li>
+        <li><a href="#industries">Industries <span style="font-size:9px;opacity:.6">▾</span></a></li>
+        <li><a href="#platform">Company <span style="font-size:9px;opacity:.6">▾</span></a></li>
+        <li><a href="#">Resources <span style="font-size:9px;opacity:.6">▾</span></a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <a href="#" class="btn btn-outline-white" style="margin-left:24px;">Request a Demo</a>
     </div>
   </nav>
 
-  <!-- ══ HERO ════════════════════════════════════════════════════ -->
+  <!-- ══ HERO ════════════════════════════════════════════════ -->
   <section class="hero">
-    <div class="badge">
-      <span class="badge-dot"></span>
-      Introducing Luminary 2.0
-    </div>
-    <h1 class="hero-headline">Build beautiful products,<br>faster than ever before.</h1>
-    <p class="hero-sub">Luminary gives your team the tools to design, iterate, and ship with confidence — all in one seamless workflow.</p>
-    <div class="hero-buttons">
-      <button class="btn btn-primary-lg">Start for free</button>
-      <button class="btn btn-secondary-lg">See how it works →</button>
-    </div>
-
-    <!-- App Mockup -->
-    <div class="mockup-wrap">
-      <div class="browser-bar">
-        <span class="traffic-dot" style="background:#FF5F57;"></span>
-        <span class="traffic-dot" style="background:#FFBD2E;"></span>
-        <span class="traffic-dot" style="background:#27C93F;"></span>
-        <div class="browser-spacer"></div>
-        <div class="url-bar">luminary.app/dashboard</div>
-        <div class="browser-spacer"></div>
-      </div>
-      <div class="mockup-content">
-        <div class="mock-sidebar">
-          <div class="mock-sidebar-item active">
-            <div class="mock-sidebar-bar" style="width:100px; background:var(--accent);"></div>
-          </div>
-          <div class="mock-sidebar-item">
-            <div class="mock-sidebar-bar" style="width:80px; background:var(--gray-200);"></div>
-          </div>
-          <div class="mock-sidebar-item">
-            <div class="mock-sidebar-bar" style="width:120px; background:var(--gray-200);"></div>
-          </div>
-          <div class="mock-sidebar-item">
-            <div class="mock-sidebar-bar" style="width:90px; background:var(--gray-200);"></div>
-          </div>
-          <div class="mock-sidebar-item">
-            <div class="mock-sidebar-bar" style="width:110px; background:var(--gray-200);"></div>
-          </div>
-        </div>
-        <div class="mock-main">
-          <div class="mock-card">
-            <div class="mock-card-title"></div>
-            <div class="mock-card-value"></div>
-            <div class="mock-card-bar" style="width:100%;"></div>
-            <div class="mock-card-bar" style="width:75%;"></div>
-          </div>
-          <div class="mock-card">
-            <div class="mock-card-title"></div>
-            <div class="mock-card-value"></div>
-            <div class="mock-card-bar" style="width:100%;"></div>
-            <div class="mock-card-bar" style="width:75%;"></div>
-          </div>
-          <div class="mock-card">
-            <div class="mock-card-title"></div>
-            <div class="mock-card-value"></div>
-            <div class="mock-card-bar" style="width:100%;"></div>
-            <div class="mock-card-bar" style="width:75%;"></div>
-          </div>
-          <div class="mock-card">
-            <div class="mock-card-title"></div>
-            <div class="mock-card-value"></div>
-            <div class="mock-card-bar" style="width:100%;"></div>
-            <div class="mock-card-bar" style="width:75%;"></div>
-          </div>
-          <div class="mock-card">
-            <div class="mock-card-title"></div>
-            <div class="mock-card-value"></div>
-            <div class="mock-card-bar" style="width:100%;"></div>
-            <div class="mock-card-bar" style="width:75%;"></div>
-          </div>
-          <div class="mock-card">
-            <div class="mock-card-title"></div>
-            <div class="mock-card-value"></div>
-            <div class="mock-card-bar" style="width:100%;"></div>
-            <div class="mock-card-bar" style="width:75%;"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ SOCIAL PROOF ════════════════════════════════════════════ -->
-  <section class="social-proof">
-    <span class="social-proof-label">Trusted by teams at</span>
-    <div class="logo-row">
-      <span>Notion</span>
-      <span>Linear</span>
-      <span>Vercel</span>
-      <span>Stripe</span>
-      <span>Figma</span>
-    </div>
-  </section>
-
-  <!-- ══ FEATURES ════════════════════════════════════════════════ -->
-  <section class="features" id="features">
-    <span class="section-eyebrow">Features</span>
-    <h2 class="section-title">Everything you need to move fast</h2>
-    <p class="section-sub">Powerful tools that help your team collaborate, design, and ship better products with less friction.</p>
-    <div class="feature-cards">
-      <div class="feature-card">
-        <div class="icon-box" style="background:#FEF08A;">⚡</div>
-        <div class="feature-card-title">Blazing Fast Performance</div>
-        <div class="feature-card-desc">Built for speed from the ground up. Experience near-instant load times and smooth interactions across all devices.</div>
-      </div>
-      <div class="feature-card">
-        <div class="icon-box" style="background:#BBF7D0;">🔒</div>
-        <div class="feature-card-title">Enterprise-Grade Security</div>
-        <div class="feature-card-desc">Your data is protected with end-to-end encryption, SSO support, and SOC 2 Type II compliance out of the box.</div>
-      </div>
-      <div class="feature-card">
-        <div class="icon-box" style="background:#C7D2FE;">🤝</div>
-        <div class="feature-card-title">Real-Time Collaboration</div>
-        <div class="feature-card-desc">Work alongside your team in real time. See changes instantly, leave comments, and resolve feedback seamlessly.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ TESTIMONIALS ════════════════════════════════════════════ -->
-  <section class="testimonials">
-    <span class="section-eyebrow">What people are saying</span>
-    <div class="testimonial-image-wrap">
-      <img src="https://www.figma.com/api/mcp/asset/4d92d3df-c218-4d42-bb74-764c162d2884" alt="Luminary platform visualization" />
-    </div>
-    <div class="testimonial-cards">
-      <div class="testimonial-card">
-        <p class="testimonial-quote">"Luminary completely transformed how our design team works. We ship 3x faster now."</p>
-        <div>
-          <div class="testimonial-author-name">Sarah Kim</div>
-          <div class="testimonial-author-role">Head of Design, Acme</div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <p class="testimonial-quote">"The real-time collaboration features are unmatched. It's the tool our team didn't know it needed."</p>
-        <div>
-          <div class="testimonial-author-name">Marcus Torres</div>
-          <div class="testimonial-author-role">CTO, BuildFast</div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <p class="testimonial-quote">"Simple, powerful, and beautiful. Luminary is the only tool on our stack that everyone loves."</p>
-        <div>
-          <div class="testimonial-author-name">Priya Nair</div>
-          <div class="testimonial-author-role">Product Lead, Orbit</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ CTA ══════════════════════════════════════════════════════ -->
-  <section class="cta-section">
-    <h2 class="cta-title">Ready to get started?</h2>
-    <p class="cta-sub">Join over 10,000 teams already using Luminary.<br>No credit card required.</p>
-    <div class="cta-buttons">
-      <button class="btn btn-white">Start free trial</button>
-      <button class="btn btn-outline-white">Talk to sales</button>
-    </div>
-  </section>
-
-  <!-- ══ FOOTER ══════════════════════════════════════════════════ -->
-  <footer class="footer">
     <div class="container">
-      <div>
-        <div class="footer-logo">Luminary</div>
-        <div class="footer-copy">© 2026 Luminary, Inc. All rights reserved.</div>
+      <p class="hero-eyebrow">Agentic Material Orchestration</p>
+      <h1 class="hero-headline">The Operating System<br>for Your Factory Floor</h1>
+      <p class="hero-body">Luminary Robotics delivers the agentic orchestration layer that connects your robots, data, and operations into one unified platform — without changing how your floor works.</p>
+      <div class="hero-buttons">
+        <a href="#" class="btn btn-primary">Request a Demo <span style="display:inline-flex;width:18px;height:18px;border:2px solid #fff;border-radius:50%;align-items:center;justify-content:center;font-size:10px;">→</span></a>
+        <a href="#solutions" class="btn btn-text">Explore Solutions →</a>
       </div>
-      <div class="footer-spacer"></div>
-      <nav class="footer-links">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-        <a href="#">Docs</a>
-        <a href="#">Blog</a>
-        <a href="#">Contact</a>
-      </nav>
     </div>
+  </section>
+
+  <!-- ══ STATS ════════════════════════════════════════════════ -->
+  <section class="stats">
+    <div class="stats-grid">
+      <div class="stat-item fade-up">
+        <div class="stat-number">70+</div>
+        <div class="stat-label">Factories Deployed</div>
+      </div>
+      <div class="stat-item fade-up">
+        <div class="stat-number">99%</div>
+        <div class="stat-label">Mission Success Rate</div>
+      </div>
+      <div class="stat-item fade-up">
+        <div class="stat-number">&lt;6mo</div>
+        <div class="stat-label">Average Payback Period (US)</div>
+      </div>
+      <div class="stat-item fade-up">
+        <div class="stat-number">2M</div>
+        <div class="stat-label">Missions Completed</div>
+      </div>
+      <div class="stat-item fade-up">
+        <div class="stat-number">3–5wk</div>
+        <div class="stat-label">Average Deployment Time</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SOLUTIONS ════════════════════════════════════════════ -->
+  <section class="solutions" id="solutions">
+    <div class="container">
+      <h2 class="section-heading">Solutions Built for How Your Floor Works</h2>
+      <p class="section-sub">Purpose-built for material movement in complex factory environments — from tugging to full orchestration.</p>
+      <div class="cards-grid-4">
+        <div class="sol-card fade-up">
+          <div class="sol-card-image"></div>
+          <div class="sol-card-body">
+            <div class="sol-card-title">Tugging</div>
+            <a href="#" class="card-cta">Explore <span style="display:inline-flex;width:16px;height:16px;border:1.5px solid #fff;border-radius:50%;align-items:center;justify-content:center;font-size:9px;">→</span></a>
+          </div>
+        </div>
+        <div class="sol-card fade-up">
+          <div class="sol-card-image"></div>
+          <div class="sol-card-body">
+            <div class="sol-card-title">Pallet Handling</div>
+            <a href="#" class="card-cta">Explore <span style="display:inline-flex;width:16px;height:16px;border:1.5px solid #fff;border-radius:50%;align-items:center;justify-content:center;font-size:9px;">→</span></a>
+          </div>
+        </div>
+        <div class="sol-card fade-up">
+          <div class="sol-card-image"></div>
+          <div class="sol-card-body">
+            <div class="sol-card-title">Flexible Handling</div>
+            <a href="#" class="card-cta">Explore <span style="display:inline-flex;width:16px;height:16px;border:1.5px solid #fff;border-radius:50%;align-items:center;justify-content:center;font-size:9px;">→</span></a>
+          </div>
+        </div>
+        <div class="sol-card fade-up">
+          <div class="sol-card-image"></div>
+          <div class="sol-card-body">
+            <div class="sol-card-title">Software & Orchestration</div>
+            <a href="#" class="card-cta">Explore <span style="display:inline-flex;width:16px;height:16px;border:1.5px solid #fff;border-radius:50%;align-items:center;justify-content:center;font-size:9px;">→</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ INDUSTRIES ═══════════════════════════════════════════ -->
+  <section class="industries" id="industries">
+    <div class="container">
+      <div class="section-header-row">
+        <div>
+          <h2 class="section-heading">Built for the Industries<br>That Build Everything</h2>
+          <p class="section-sub" style="margin-bottom:0;">Deployed across the most demanding factory environments on the planet.</p>
+        </div>
+        <a href="#" class="btn btn-outline" style="color:var(--grey-900);border-color:var(--grey-900);white-space:nowrap;align-self:flex-end;">All Industries →</a>
+      </div>
+      <div class="cards-grid-4">
+        <div class="sol-card fade-up">
+          <div class="sol-card-image"></div>
+          <div class="sol-card-body">
+            <div class="sol-card-title">Manufacturing</div>
+            <a href="#" class="card-cta">Learn More <span style="display:inline-flex;width:16px;height:16px;border:1.5px solid #fff;border-radius:50%;align-items:center;justify-content:center;font-size:9px;">→</span></a>
+          </div>
+        </div>
+        <div class="sol-card fade-up">
+          <div class="sol-card-image"></div>
+          <div class="sol-card-body">
+            <div class="sol-card-title">Automotive</div>
+            <a href="#" class="card-cta">Learn More <span style="display:inline-flex;width:16px;height:16px;border:1.5px solid #fff;border-radius:50%;align-items:center;justify-content:center;font-size:9px;">→</span></a>
+          </div>
+        </div>
+        <div class="sol-card fade-up">
+          <div class="sol-card-image"></div>
+          <div class="sol-card-body">
+            <div class="sol-card-title">Consumer Goods</div>
+            <a href="#" class="card-cta">Learn More <span style="display:inline-flex;width:16px;height:16px;border:1.5px solid #fff;border-radius:50%;align-items:center;justify-content:center;font-size:9px;">→</span></a>
+          </div>
+        </div>
+        <div class="sol-card fade-up">
+          <div class="sol-card-image"></div>
+          <div class="sol-card-body">
+            <div class="sol-card-title">Electronics</div>
+            <a href="#" class="card-cta">Learn More <span style="display:inline-flex;width:16px;height:16px;border:1.5px solid #fff;border-radius:50%;align-items:center;justify-content:center;font-size:9px;">→</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PLATFORM ═════════════════════════════════════════════ -->
+  <section class="platform" id="platform">
+    <div class="container">
+      <p class="section-eyebrow">The Luminary Robotics Platform</p>
+      <h2 class="section-heading light">One Platform. From the Robot<br>to the Boardroom.</h2>
+      <p class="section-sub light">A unified stack connecting physical control to enterprise reporting — so every layer of your operation works as one.</p>
+      <div class="platform-grid">
+        <div class="platform-layer fade-up">
+          <div class="layer-num">Layer 01</div>
+          <div class="layer-title">Physical Control</div>
+          <div class="layer-desc">Robot hardware, sensor arrays, and precision motion control at the edge.</div>
+        </div>
+        <div class="platform-layer fade-up">
+          <div class="layer-num">Layer 02</div>
+          <div class="layer-title">Real-Time Data Sensing</div>
+          <div class="layer-desc">LIDAR, vision, and environmental mapping at machine speed.</div>
+        </div>
+        <div class="platform-layer fade-up">
+          <div class="layer-num">Layer 03</div>
+          <div class="layer-title">AI-Driven Orchestration</div>
+          <div class="layer-desc">Fleet routing, dynamic scheduling, and autonomous decision-making across your floor.</div>
+        </div>
+        <div class="platform-layer fade-up">
+          <div class="layer-num">Layer 04</div>
+          <div class="layer-title">System of Record</div>
+          <div class="layer-desc">Dashboard analytics, inventory tracking, and boardroom-ready reporting.</div>
+        </div>
+      </div>
+      <div style="margin-top:40px;">
+        <a href="#" class="btn btn-outline">Explore the Platform →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CTA BANNER ═══════════════════════════════════════════ -->
+  <section class="cta-banner">
+    <div class="container">
+      <h2 class="cta-banner-headline">See What Luminary Robotics Does on Your Floor</h2>
+      <p class="cta-banner-sub">Deploy faster. Operate smarter. See ROI in under 6 months — without changing how your floor works.</p>
+      <div class="cta-buttons">
+        <a href="#" class="btn btn-teal">Request a Demo</a>
+        <a href="#solutions" class="btn btn-outline">Explore Solutions →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer-logo">Luminary Robotics</div>
+    <div class="footer-spacer"></div>
+    <ul class="footer-links">
+      <li><a href="#">Solutions</a></li>
+      <li><a href="#">Industries</a></li>
+      <li><a href="#">Platform</a></li>
+      <li><a href="#">Company</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 Luminary Robotics. All rights reserved.</div>
   </footer>
 
   <script>
-    // Smooth scroll for nav links
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
-      link.addEventListener('click', e => {
-        const target = document.querySelector(link.getAttribute('href'));
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-    });
-
-    // Navbar shadow on scroll
+    // Sticky navbar border
     const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', () => {
-      navbar.style.boxShadow = window.scrollY > 10
-        ? '0 2px 16px rgba(15,23,42,0.08)'
+      navbar.style.borderBottom = window.scrollY > 10
+        ? '1px solid rgba(255,255,255,0.08)'
         : 'none';
     });
 
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+      });
+    });
+
     // Fade-in on scroll
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
         }
       });
     }, { threshold: 0.1 });
-
-    document.querySelectorAll('.feature-card, .testimonial-card').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(20px)';
-      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-      observer.observe(el);
-    });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
