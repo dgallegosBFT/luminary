@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luminary – Build beautiful products, faster than ever before.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Base ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #0F1728;
+      background: #fff;
+      min-width: 320px;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── Tokens ─────────────────────────────────────────────────── */
+    :root {
+      --accent:       #4F46E5;
+      --accent-dark:  #3730A3;
+      --accent-light: #EEF2FF;
+      --dark:         #0F1728;
+      --gray-500:     #64748B;
+      --gray-200:     #E2E8F0;
+      --gray-100:     #F1F5F9;
+      --gray-50:      #F8FAFC;
+      --white:        #ffffff;
+    }
+
+    /* ── Layout Helpers ─────────────────────────────────────────── */
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 80px;
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       NAVBAR
+    ════════════════════════════════════════════════════════════ */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      height: 72px;
+    }
+    .navbar .container {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+    .navbar-logo {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .navbar-spacer { flex: 1; }
+    .navbar-links {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+    .navbar-links a {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--gray-500);
+      padding: 0 16px;
+      transition: color 0.2s;
+    }
+    .navbar-links a:hover { color: var(--dark); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+      border: none;
+    }
+    .btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--white);
+      font-size: 14px;
+      padding: 10px 20px;
+    }
+    .btn-primary-lg {
+      background: var(--accent);
+      color: var(--white);
+      font-size: 16px;
+      padding: 16px 28px;
+    }
+    .btn-secondary-lg {
+      background: var(--white);
+      color: var(--dark);
+      font-size: 16px;
+      padding: 15px 28px;
+      border: 1.5px solid var(--gray-200);
+    }
+    .btn-white {
+      background: var(--white);
+      color: var(--accent);
+      font-size: 16px;
+      padding: 16px 32px;
+    }
+    .btn-outline-white {
+      background: transparent;
+      color: var(--white);
+      font-size: 16px;
+      padding: 15px 32px;
+      border: 1.5px solid #A5B4FC;
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       HERO
+    ════════════════════════════════════════════════════════════ */
+    .hero {
+      background: var(--white);
+      padding: 80px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 100px;
+    }
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    .hero-headline {
+      margin-top: 24px;
+      font-size: 64px;
+      font-weight: 700;
+      line-height: 76px;
+      color: var(--dark);
+      max-width: 800px;
+    }
+    .hero-sub {
+      margin-top: 20px;
+      font-size: 20px;
+      line-height: 32px;
+      color: var(--gray-500);
+      max-width: 620px;
+    }
+    .hero-buttons {
+      margin-top: 36px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    /* ── App Mockup ─────────────────────────────────────────────── */
+    .mockup-wrap {
+      margin-top: 60px;
+      width: 960px;
+      max-width: calc(100% - 80px);
+      border-radius: 16px;
+      border: 1px solid var(--gray-200);
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(15,23,42,0.10);
+    }
+    .browser-bar {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      height: 44px;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 8px;
+    }
+    .traffic-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .browser-spacer { flex: 1; }
+    .url-bar {
+      background: var(--gray-100);
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 12px;
+      color: var(--gray-500);
+      width: 280px;
+      text-align: center;
+    }
+    .mockup-content {
+      display: flex;
+      background: linear-gradient(to bottom right, var(--accent-light), #E0E7FF);
+      height: 476px;
+    }
+    .mock-sidebar {
+      width: 200px;
+      flex-shrink: 0;
+      background: var(--white);
+      border-right: 1px solid var(--gray-200);
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .mock-sidebar-item {
+      height: 36px;
+      border-radius: 6px;
+      padding: 0 12px;
+      display: flex;
+      align-items: center;
+    }
+    .mock-sidebar-item.active { background: var(--accent-light); }
+    .mock-sidebar-bar {
+      height: 12px;
+      border-radius: 4px;
+    }
+    .mock-main {
+      flex: 1;
+      background: var(--gray-50);
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .mock-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .mock-card-title { height: 10px; border-radius: 4px; background: var(--gray-200); width: 120px; }
+    .mock-card-value { height: 22px; border-radius: 4px; background: var(--accent); width: 80px; }
+    .mock-card-bar  { height: 8px;  border-radius: 4px; background: var(--gray-100); }
+
+    /* ════════════════════════════════════════════════════════════
+       SOCIAL PROOF STRIP
+    ════════════════════════════════════════════════════════════ */
+    .social-proof {
+      background: var(--gray-100);
+      height: 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+    .social-proof-label {
+      font-size: 14px;
+      color: var(--gray-500);
+    }
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 56px;
+    }
+    .logo-row span {
+      font-size: 18px;
+      font-weight: 700;
+      color: #94A3B8;
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       FEATURES SECTION
+    ════════════════════════════════════════════════════════════ */
+    .features {
+      background: var(--white);
+      padding: 80px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .section-eyebrow {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .section-title {
+      margin-top: 16px;
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--dark);
+      text-align: center;
+    }
+    .section-sub {
+      margin-top: 16px;
+      font-size: 18px;
+      line-height: 28px;
+      color: var(--gray-500);
+      text-align: center;
+      max-width: 560px;
+    }
+    .feature-cards {
+      margin-top: 56px;
+      display: flex;
+      gap: 24px;
+      width: 100%;
+      max-width: 1248px;
+      padding: 0 80px;
+    }
+    .feature-card {
+      flex: 1;
+      background: var(--gray-100);
+      border-radius: 16px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    .feature-card-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--dark);
+    }
+    .feature-card-desc {
+      font-size: 15px;
+      line-height: 24px;
+      color: var(--gray-500);
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       TESTIMONIALS
+    ════════════════════════════════════════════════════════════ */
+    .testimonials {
+      background: var(--gray-50);
+      padding: 64px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 48px;
+    }
+    .testimonial-image-wrap {
+      width: 824px;
+      max-width: calc(100% - 80px);
+      height: 526px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 16px 48px rgba(15,23,42,0.14);
+    }
+    .testimonial-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .testimonial-cards {
+      display: flex;
+      gap: 24px;
+      max-width: 1248px;
+      width: 100%;
+      padding: 0 80px;
+    }
+    .testimonial-card {
+      flex: 1;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 14px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .testimonial-quote {
+      font-size: 15px;
+      line-height: 24px;
+      color: var(--dark);
+    }
+    .testimonial-author-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--dark);
+    }
+    .testimonial-author-role {
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-top: 2px;
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       CTA SECTION
+    ════════════════════════════════════════════════════════════ */
+    .cta-section {
+      background: linear-gradient(to right, var(--accent), var(--accent-dark));
+      padding: 64px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      text-align: center;
+    }
+    .cta-title {
+      font-size: 44px;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .cta-sub {
+      font-size: 18px;
+      line-height: 28px;
+      color: #C7D2FE;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    /* ════════════════════════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════════════════════════ */
+    .footer {
+      background: #0F1728;
+      height: 200px;
+      display: flex;
+      align-items: center;
+    }
+    .footer .container {
+      display: flex;
+      align-items: center;
+    }
+    .footer-logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .footer-copy {
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-top: 8px;
+    }
+    .footer-spacer { flex: 1; }
+    .footer-links {
+      display: flex;
+      gap: 32px;
+    }
+    .footer-links a {
+      font-size: 14px;
+      color: var(--gray-500);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--white); }
+
+    /* ════════════════════════════════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════════════════════════════════ */
+    @media (max-width: 1100px) {
+      .container { padding: 0 40px; }
+      .feature-cards, .testimonial-cards { padding: 0 40px; }
+      .hero-headline { font-size: 48px; line-height: 60px; }
+      .mockup-wrap { width: 100%; }
+    }
+    @media (max-width: 768px) {
+      .container { padding: 0 24px; }
+      .navbar-links { display: none; }
+      .hero-headline { font-size: 36px; line-height: 48px; }
+      .hero-sub { font-size: 17px; }
+      .hero-buttons { flex-direction: column; }
+      .feature-cards, .testimonial-cards {
+        flex-direction: column;
+        padding: 0 24px;
+      }
+      .logo-row { gap: 24px; flex-wrap: wrap; justify-content: center; }
+      .cta-title { font-size: 32px; }
+      .cta-buttons { flex-direction: column; }
+      .footer { height: auto; padding: 40px 0; }
+      .footer .container { flex-direction: column; gap: 24px; text-align: center; }
+      .footer-spacer { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ NAVBAR ══════════════════════════════════════════════════ -->
+  <nav class="navbar">
+    <div class="container">
+      <span class="navbar-logo">Luminary</span>
+      <div class="navbar-spacer"></div>
+      <div class="navbar-links">
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#about">About</a>
+        <a href="#blog">Blog</a>
+      </div>
+      <button class="btn btn-primary" style="margin-left: 16px;">Get Started</button>
+    </div>
+  </nav>
+
+  <!-- ══ HERO ════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="badge">
+      <span class="badge-dot"></span>
+      Introducing Luminary 2.0
+    </div>
+    <h1 class="hero-headline">Build beautiful products,<br>faster than ever before.</h1>
+    <p class="hero-sub">Luminary gives your team the tools to design, iterate, and ship with confidence — all in one seamless workflow.</p>
+    <div class="hero-buttons">
+      <button class="btn btn-primary-lg">Start for free</button>
+      <button class="btn btn-secondary-lg">See how it works →</button>
+    </div>
+
+    <!-- App Mockup -->
+    <div class="mockup-wrap">
+      <div class="browser-bar">
+        <span class="traffic-dot" style="background:#FF5F57;"></span>
+        <span class="traffic-dot" style="background:#FFBD2E;"></span>
+        <span class="traffic-dot" style="background:#27C93F;"></span>
+        <div class="browser-spacer"></div>
+        <div class="url-bar">luminary.app/dashboard</div>
+        <div class="browser-spacer"></div>
+      </div>
+      <div class="mockup-content">
+        <div class="mock-sidebar">
+          <div class="mock-sidebar-item active">
+            <div class="mock-sidebar-bar" style="width:100px; background:var(--accent);"></div>
+          </div>
+          <div class="mock-sidebar-item">
+            <div class="mock-sidebar-bar" style="width:80px; background:var(--gray-200);"></div>
+          </div>
+          <div class="mock-sidebar-item">
+            <div class="mock-sidebar-bar" style="width:120px; background:var(--gray-200);"></div>
+          </div>
+          <div class="mock-sidebar-item">
+            <div class="mock-sidebar-bar" style="width:90px; background:var(--gray-200);"></div>
+          </div>
+          <div class="mock-sidebar-item">
+            <div class="mock-sidebar-bar" style="width:110px; background:var(--gray-200);"></div>
+          </div>
+        </div>
+        <div class="mock-main">
+          <div class="mock-card">
+            <div class="mock-card-title"></div>
+            <div class="mock-card-value"></div>
+            <div class="mock-card-bar" style="width:100%;"></div>
+            <div class="mock-card-bar" style="width:75%;"></div>
+          </div>
+          <div class="mock-card">
+            <div class="mock-card-title"></div>
+            <div class="mock-card-value"></div>
+            <div class="mock-card-bar" style="width:100%;"></div>
+            <div class="mock-card-bar" style="width:75%;"></div>
+          </div>
+          <div class="mock-card">
+            <div class="mock-card-title"></div>
+            <div class="mock-card-value"></div>
+            <div class="mock-card-bar" style="width:100%;"></div>
+            <div class="mock-card-bar" style="width:75%;"></div>
+          </div>
+          <div class="mock-card">
+            <div class="mock-card-title"></div>
+            <div class="mock-card-value"></div>
+            <div class="mock-card-bar" style="width:100%;"></div>
+            <div class="mock-card-bar" style="width:75%;"></div>
+          </div>
+          <div class="mock-card">
+            <div class="mock-card-title"></div>
+            <div class="mock-card-value"></div>
+            <div class="mock-card-bar" style="width:100%;"></div>
+            <div class="mock-card-bar" style="width:75%;"></div>
+          </div>
+          <div class="mock-card">
+            <div class="mock-card-title"></div>
+            <div class="mock-card-value"></div>
+            <div class="mock-card-bar" style="width:100%;"></div>
+            <div class="mock-card-bar" style="width:75%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SOCIAL PROOF ════════════════════════════════════════════ -->
+  <section class="social-proof">
+    <span class="social-proof-label">Trusted by teams at</span>
+    <div class="logo-row">
+      <span>Notion</span>
+      <span>Linear</span>
+      <span>Vercel</span>
+      <span>Stripe</span>
+      <span>Figma</span>
+    </div>
+  </section>
+
+  <!-- ══ FEATURES ════════════════════════════════════════════════ -->
+  <section class="features" id="features">
+    <span class="section-eyebrow">Features</span>
+    <h2 class="section-title">Everything you need to move fast</h2>
+    <p class="section-sub">Powerful tools that help your team collaborate, design, and ship better products with less friction.</p>
+    <div class="feature-cards">
+      <div class="feature-card">
+        <div class="icon-box" style="background:#FEF08A;">⚡</div>
+        <div class="feature-card-title">Blazing Fast Performance</div>
+        <div class="feature-card-desc">Built for speed from the ground up. Experience near-instant load times and smooth interactions across all devices.</div>
+      </div>
+      <div class="feature-card">
+        <div class="icon-box" style="background:#BBF7D0;">🔒</div>
+        <div class="feature-card-title">Enterprise-Grade Security</div>
+        <div class="feature-card-desc">Your data is protected with end-to-end encryption, SSO support, and SOC 2 Type II compliance out of the box.</div>
+      </div>
+      <div class="feature-card">
+        <div class="icon-box" style="background:#C7D2FE;">🤝</div>
+        <div class="feature-card-title">Real-Time Collaboration</div>
+        <div class="feature-card-desc">Work alongside your team in real time. See changes instantly, leave comments, and resolve feedback seamlessly.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ TESTIMONIALS ════════════════════════════════════════════ -->
+  <section class="testimonials">
+    <span class="section-eyebrow">What people are saying</span>
+    <div class="testimonial-image-wrap">
+      <img src="https://www.figma.com/api/mcp/asset/4d92d3df-c218-4d42-bb74-764c162d2884" alt="Luminary platform visualization" />
+    </div>
+    <div class="testimonial-cards">
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"Luminary completely transformed how our design team works. We ship 3x faster now."</p>
+        <div>
+          <div class="testimonial-author-name">Sarah Kim</div>
+          <div class="testimonial-author-role">Head of Design, Acme</div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"The real-time collaboration features are unmatched. It's the tool our team didn't know it needed."</p>
+        <div>
+          <div class="testimonial-author-name">Marcus Torres</div>
+          <div class="testimonial-author-role">CTO, BuildFast</div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"Simple, powerful, and beautiful. Luminary is the only tool on our stack that everyone loves."</p>
+        <div>
+          <div class="testimonial-author-name">Priya Nair</div>
+          <div class="testimonial-author-role">Product Lead, Orbit</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CTA ══════════════════════════════════════════════════════ -->
+  <section class="cta-section">
+    <h2 class="cta-title">Ready to get started?</h2>
+    <p class="cta-sub">Join over 10,000 teams already using Luminary.<br>No credit card required.</p>
+    <div class="cta-buttons">
+      <button class="btn btn-white">Start free trial</button>
+      <button class="btn btn-outline-white">Talk to sales</button>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ══════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div>
+        <div class="footer-logo">Luminary</div>
+        <div class="footer-copy">© 2026 Luminary, Inc. All rights reserved.</div>
+      </div>
+      <div class="footer-spacer"></div>
+      <nav class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Docs</a>
+        <a href="#">Blog</a>
+        <a href="#">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', e => {
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Navbar shadow on scroll
+    const navbar = document.querySelector('.navbar');
+    window.addEventListener('scroll', () => {
+      navbar.style.boxShadow = window.scrollY > 10
+        ? '0 2px 16px rgba(15,23,42,0.08)'
+        : 'none';
+    });
+
+    // Fade-in on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.feature-card, .testimonial-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
