@@ -151,10 +151,18 @@
     }
     .sol-card:hover { border-color: rgba(0,169,157,0.45); transform: translateY(-4px); }
     .sol-card-img {
-      height: 140px;
-      background: linear-gradient(135deg, #1a1a1a 0%, #0d2220 100%);
-      display: flex; align-items: center; justify-content: center;
+      height: 180px;
+      background: #111;
+      overflow: hidden;
     }
+    .sol-card-img img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      display: block;
+      filter: brightness(0.9);
+      transition: transform .3s;
+    }
+    .sol-card:hover .sol-card-img img { transform: scale(1.04); }
     .sol-card-body { padding: 20px; }
     .sol-card-title { font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
     .sol-card-desc { font-size: 12px; color: var(--text-muted); line-height: 1.7; }
@@ -185,10 +193,13 @@
       border-radius: 12px; border: 1.5px solid rgba(0,169,157,0.5);
       box-shadow: 0 0 60px rgba(0,169,157,0.07);
       overflow: hidden; aspect-ratio: 1 / 1;
-      display: flex; align-items: center; justify-content: center;
-      background: linear-gradient(135deg, #111 0%, #0d2220 100%);
+      background: #111;
     }
-    .feature-card svg { opacity: 0.8; }
+    .feature-card img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      display: block;
+    }
 
     /* ── DEMO FORM ── */
     .demo-section {
@@ -310,12 +321,7 @@
     <div class="solutions-grid">
       <div class="sol-card">
         <div class="sol-card-img">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-            <rect x="8" y="18" width="32" height="20" rx="4" stroke="#00A99D" stroke-width="1.5"/>
-            <rect x="14" y="10" width="20" height="10" rx="2" stroke="#555" stroke-width="1.5"/>
-            <circle cx="16" cy="42" r="4" stroke="#555" stroke-width="1.5"/>
-            <circle cx="32" cy="42" r="4" stroke="#555" stroke-width="1.5"/>
-          </svg>
+          <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=600&q=80&fit=crop&crop=top" alt="Tugging" />
         </div>
         <div class="sol-card-body">
           <div class="sol-card-title">Tugging</div>
@@ -325,12 +331,7 @@
       </div>
       <div class="sol-card">
         <div class="sol-card-img">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-            <rect x="4" y="24" width="40" height="16" rx="4" stroke="#00A99D" stroke-width="1.5"/>
-            <rect x="10" y="14" width="28" height="12" rx="3" stroke="#555" stroke-width="1.5"/>
-            <circle cx="14" cy="44" r="4" stroke="#555" stroke-width="1.5"/>
-            <circle cx="34" cy="44" r="4" stroke="#555" stroke-width="1.5"/>
-          </svg>
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80&fit=crop&crop=top" alt="Pallet Handling" />
         </div>
         <div class="sol-card-body">
           <div class="sol-card-title">Pallet Handling</div>
@@ -340,11 +341,7 @@
       </div>
       <div class="sol-card">
         <div class="sol-card-img">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-            <circle cx="24" cy="24" r="12" stroke="#00A99D" stroke-width="1.5"/>
-            <path d="M24 12V6M24 42V36M12 24H6M42 24H36" stroke="#555" stroke-width="1.5" stroke-linecap="round"/>
-            <circle cx="24" cy="24" r="4" fill="#00A99D" opacity="0.4"/>
-          </svg>
+          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80&fit=crop&crop=top" alt="Flexible Handling" />
         </div>
         <div class="sol-card-body">
           <div class="sol-card-title">Flexible Handling</div>
@@ -353,8 +350,8 @@
         </div>
       </div>
       <div class="sol-card">
-        <div class="sol-card-img">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <div class="sol-card-img" style="background:#1a1a1a; display:flex; align-items:center; justify-content:center;">
+          <svg width="56" height="56" viewBox="0 0 48 48" fill="none" style="opacity:0.4;">
             <rect x="6" y="10" width="36" height="24" rx="3" stroke="#00A99D" stroke-width="1.5"/>
             <line x1="6" y1="18" x2="42" y2="18" stroke="#555" stroke-width="1"/>
             <rect x="12" y="22" width="10" height="6" rx="1" fill="#00A99D" opacity="0.4"/>
@@ -382,16 +379,7 @@
         <li class="feature-item">ISO3691-4 Safety Certified</li>
       </ul>
       <div class="feature-card">
-        <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
-          <rect x="25" y="35" width="50" height="38" rx="5" stroke="#00A99D" stroke-width="2"/>
-          <rect x="36" y="22" width="28" height="16" rx="4" stroke="#00A99D" stroke-width="2" opacity="0.6"/>
-          <circle cx="50" cy="30" r="4" fill="#00A99D" opacity="0.5"/>
-          <rect x="10" y="48" width="15" height="20" rx="4" stroke="#555" stroke-width="1.5"/>
-          <rect x="75" y="48" width="15" height="20" rx="4" stroke="#555" stroke-width="1.5"/>
-          <rect x="33" y="73" width="14" height="12" rx="3" stroke="#555" stroke-width="1.5"/>
-          <rect x="53" y="73" width="14" height="12" rx="3" stroke="#555" stroke-width="1.5"/>
-          <circle cx="50" cy="54" r="6" stroke="#00A99D" stroke-width="1.5" opacity="0.7"/>
-        </svg>
+        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=700&q=85&fit=crop&crop=top" alt="Luminary Robotics operator" />
       </div>
     </div>
   </section>
